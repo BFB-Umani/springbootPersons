@@ -1,6 +1,6 @@
 package com.inlamning.springbootPersons.service;
 
-import com.inlamning.springbootPersons.entities.PersonEntity;
+import com.inlamning.springbootPersons.models.PersonEntity;
 import com.inlamning.springbootPersons.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

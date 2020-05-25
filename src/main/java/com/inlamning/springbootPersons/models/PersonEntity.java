@@ -1,4 +1,4 @@
-package com.inlamning.springbootPersons.entities;
+package com.inlamning.springbootPersons.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

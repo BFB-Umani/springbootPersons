@@ -1,20 +1,17 @@
 package com.inlamning.springbootPersons.controller;
 
-import com.inlamning.springbootPersons.entities.PersonEntity;
+import com.inlamning.springbootPersons.models.DeleteResponse;
+import com.inlamning.springbootPersons.models.PersonEntity;
 import com.inlamning.springbootPersons.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/startsida")
+@RestController
+@RequestMapping("/persons")
 public class PersonController {
 
     private PersonService personService;
@@ -25,11 +22,9 @@ public class PersonController {
     }
 
     @GetMapping()
-    public String StartPage(Model model)
-    {
-        List<PersonEntity> personList = personService.listAll();
-        model.addAttribute("listPersons", personList);
-        return "startsida";}
+    public List<PersonEntity> StartPage() {
+        return personService.listAll();
+    }
 
     @GetMapping("/addPerson")
     public String showNewProductPage(Model model)
@@ -44,7 +39,7 @@ public class PersonController {
         return "redirect:/startsida";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String showEditPage(@PathVariable Long id, Model model)
     {
         Optional<PersonEntity> person = personService.findPerson(id);
@@ -55,10 +50,11 @@ public class PersonController {
             return "error";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id)
-    {personService.deletePerson(id);
-        return "redirect:/startsida";
+    @GetMapping("/{id}/delete")
+    public DeleteResponse deleteProduct(@PathVariable Long id) {
+        DeleteResponse deleteResponse = new DeleteResponse("Person deleted", false);
+        personService.deletePerson(id);
+        return deleteResponse;
     }
 
 
