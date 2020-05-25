@@ -1,7 +1,6 @@
 package com.inlamning.springbootPersons.service;
 
 import com.inlamning.springbootPersons.models.PersonEntity;
-import com.inlamning.springbootPersons.models.request.PersonRequestModel;
 import com.inlamning.springbootPersons.repository.PersonRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,21 +30,21 @@ public class PersonService {
     }
 
     @Transactional
-    public void save(PersonRequestModel personRequest) {
-
-        PersonEntity personEntity = new PersonEntity();
-        BeanUtils.copyProperties(personRequest, personEntity);
-
+    public void save(PersonEntity personEntity) {
         personRepository.save(personEntity);
     }
 
     @Transactional
-    public void edit(PersonEntity personEntity) {
+    public void edit(PersonEntity personEntity, PersonEntity personSent) {
+
+        personSent.setId(personEntity.getId());
+
+        BeanUtils.copyProperties(personSent, personEntity);
         personRepository.save(personEntity);
     }
 
     @Transactional
-    public void deletePerson(Long id) {
-        personRepository.deleteById(id);
+    public void deletePerson(PersonEntity personEntity) {
+        personRepository.delete(personEntity);
     }
 }
