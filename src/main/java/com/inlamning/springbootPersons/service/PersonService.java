@@ -1,7 +1,9 @@
 package com.inlamning.springbootPersons.service;
 
 import com.inlamning.springbootPersons.models.PersonEntity;
+import com.inlamning.springbootPersons.models.request.PersonRequestModel;
 import com.inlamning.springbootPersons.repository.PersonRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +31,17 @@ public class PersonService {
     }
 
     @Transactional
-    public void save(PersonEntity person) {
-        personRepository.save(person);
+    public void save(PersonRequestModel personRequest) {
+
+        PersonEntity personEntity = new PersonEntity();
+        BeanUtils.copyProperties(personRequest, personEntity);
+
+        personRepository.save(personEntity);
+    }
+
+    @Transactional
+    public void edit(PersonEntity personEntity) {
+        personRepository.save(personEntity);
     }
 
     @Transactional
