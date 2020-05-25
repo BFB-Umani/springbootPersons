@@ -25,28 +25,29 @@ public class PersonController {
     }
 
     @GetMapping()
-    public String StartPage(Model model)
-    {
+    public String StartPage(Model model) {
+
         List<PersonEntity> personList = personService.listAll();
         model.addAttribute("listPersons", personList);
         return "startsida";}
 
     @GetMapping("/addPerson")
-    public String addNewPerson(Model model)
-    {PersonEntity person = new PersonEntity();
+    public String addNewPerson(Model model) {
+
+        PersonEntity person = new PersonEntity();
         model.addAttribute("personObject",person);
         return "addPerson";}
 
     @PostMapping("/save")
-    public String savePerson(PersonEntity person)
-    {
+    public String savePerson(PersonEntity person) {
+
         personService.save(person);
         return "redirect:/startsida";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditPage(@PathVariable Long id, Model model)
-    {
+    public String showEditPage(@PathVariable Long id, Model model) {
+
         Optional<PersonEntity> person = personService.findPerson(id);
         if(person.isPresent())
         {model.addAttribute("editPerson", person.get());
@@ -56,8 +57,9 @@ public class PersonController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePerson(@PathVariable Long id)
-    {personService.deletePerson(id);
+    public String deletePerson(@PathVariable Long id) {
+
+        personService.deletePerson(id);
         return "redirect:/startsida";
     }
 
