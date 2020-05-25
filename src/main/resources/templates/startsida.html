@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>startsida</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+
+
+        <nav class="navbar fixed-top navbar-expand-lg bg-secondary navbar-light d-flex justify-content-center">
+
+            <a th:href="@{startsida/addPerson}" class="btn btn-success">add new person to database</a>
+        </nav>
+
+
+    <div class="startsida">
+
+
+        <table id="mainTable" class="table table-hover">
+            <thead>
+            <tr>
+                <th class="tableRow">ID</th>
+                <th class="tableRow">First Name</th>
+                <th class="tableRow">Last Name</th>
+                <th class="tableRow">Age</th>
+                <th class="tableRow">PhoneNumber</th>
+                <th class="tableRow">Email</th>
+                <th class="tableRow">Address</th>
+                <th class="tableRow">Edit Person Info</th>
+                <th class="tableRow">Delete Person</th>
+            </tr>
+            </thead>
+            <tbody class="tableRow">
+                <tr th:each="person : ${listPersons}">
+                    <td th:text="${person.id}" class="tableRow"></td>
+                    <td th:text="${person.firstName}" class="tableRow"></td>
+                    <td th:text="${person.lastName}" class="tableRow"></td>
+                    <td th:text="${person.age}" class="tableRow"></td>
+                    <td th:text="${person.phoneNumber}" class="tableRow"></td>
+                    <td th:text="${person.email}" class="tableRow"></td>
+                    <td th:text="${person.address}" class="tableRow"></td>
+
+                    <td class="tableRow">
+                        <a th:href="@{'startsida/edit/'+${person.id}}" class="btn btn-success">Edit Person</a>
+                    </td>
+                    <td class="tableRow">
+                        <a th:href="@{'startsida/delete/'+${person.id}}" class="btn btn-success">Delete person</a>
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>

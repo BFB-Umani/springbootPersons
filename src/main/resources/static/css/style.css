@@ -1,0 +1,18 @@
+#mainTable {
+    text-align: center;
+    border-style: solid;
+    padding: 10px;
+}
+
+.tableRow {
+    border-style: solid;
+    text-align: center;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.startsida {
+    padding-top: 75px;
+}
