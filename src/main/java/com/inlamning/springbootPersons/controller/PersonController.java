@@ -32,13 +32,13 @@ public class PersonController {
         return "startsida";}
 
     @GetMapping("/addPerson")
-    public String showNewProductPage(Model model)
+    public String addNewPerson(Model model)
     {PersonEntity person = new PersonEntity();
         model.addAttribute("personObject",person);
         return "addPerson";}
 
     @PostMapping("/save")
-    public String saveProduct(PersonEntity person)
+    public String savePerson(PersonEntity person)
     {
         personService.save(person);
         return "redirect:/startsida";
@@ -56,7 +56,7 @@ public class PersonController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id)
+    public String deletePerson(@PathVariable Long id)
     {personService.deletePerson(id);
         return "redirect:/startsida";
     }
