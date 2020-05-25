@@ -35,6 +35,7 @@ public class PersonController {
         Optional<PersonEntity> person = personService.findPerson(id);
 
         if(person.isPresent()) {
+
             if(!person.get().hasLink("all_persons")) {
                 Link link1 = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PersonController.class).getAllPersons()).withRel("all_persons");
                 person.get().add(link1);
